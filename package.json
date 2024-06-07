@@ -10,7 +10,8 @@
     "Other"
   ],
   "activationEvents": [
-	"onCommand:extension.showComments"
+	"onCommand:extension.showComments",
+    "onCommand:extension.translateComments"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -18,7 +19,11 @@
       {
         "command": "extension.showComments",
         "title": "Show Comments"
-      }
+      },
+	  {
+		  "command": "extension.translateComments",
+		  "title": "Translate Comments to English"
+	  }
     ]
   },
   "scripts": {
