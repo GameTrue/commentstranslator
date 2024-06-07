@@ -1,4 +1,6 @@
 import * as vscode from 'vscode';
+import { translate } from '@vitalets/google-translate-api';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 export function activate(context: vscode.ExtensionContext) {
     // Команда для отображения комментариев
@@ -84,16 +86,29 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         if (comments.length > 0) {
-            // need to add API to translate
-            const translations = comments.map(comment => ({
-                original: comment.text,
-                translated: `#Translated: ${comment.text}` // need to change on translated line
+            // Перевод комментариев
+            const translatedComments = await Promise.all(comments.map(async comment => {
+                try {
+					const agent = new HttpsProxyAgent('http://198.12.85.213:80');
+                    const res = await translate(comment.text, { to: 'en', fetchOptions: { agent } });
+					console.log(`Original: ${comment.text} -> Translated: ${res.text}`);
+                    return { ...comment, text: res.text };
+                } catch (err) {
+                    console.error('Translation error:', err);
+                    return comment;
+                }
             }));
 
             editor.edit(editBuilder => {
-                translations.forEach((translation, index) => {
-                    editBuilder.replace(comments[index].range, translation.translated);
+                translatedComments.forEach((comment, index) => {
+                    editBuilder.replace(comments[index].range, comment.text);
                 });
+            }).then(success => {
+                if (success) {
+                    vscode.window.showInformationMessage('Comments translated successfully.');
+                } else {
+                    vscode.window.showErrorMessage('Failed to translate comments.');
+                }
             });
         } else {
             vscode.window.showInformationMessage('No comments found in this file.');

@@ -2,7 +2,7 @@
   "name": "commentstranslator",
   "displayName": "CommentsTranslator",
   "description": "Here you can translate your comments of your file",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.90.0"
   },
@@ -10,7 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-	"onCommand:extension.showComments",
+    "onCommand:extension.showComments",
     "onCommand:extension.translateComments"
   ],
   "main": "./out/extension.js",
@@ -20,10 +20,10 @@
         "command": "extension.showComments",
         "title": "Show Comments"
       },
-	  {
-		  "command": "extension.translateComments",
-		  "title": "Translate Comments to English"
-	  }
+      {
+        "command": "extension.translateComments",
+        "title": "Translate Comments to English"
+      }
     ]
   },
   "scripts": {
@@ -35,14 +35,19 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.90.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
+    "@types/node-fetch": "^2.6.11",
+    "@types/vscode": "^1.90.0",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
-    "eslint": "^8.57.0",
-    "typescript": "^5.4.5",
     "@vscode/test-cli": "^0.0.9",
-    "@vscode/test-electron": "^2.4.0"
+    "@vscode/test-electron": "^2.4.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@vitalets/google-translate-api": "^9.2.0",
+    "http-proxy-agent": "^7.0.2"
   }
 }
