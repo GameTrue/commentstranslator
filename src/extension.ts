@@ -48,7 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
                     if (comment) {
                         // Select and reveal the chosen comment in the editor
                         editor.selection = new vscode.Selection(comment.range.start, comment.range.end);
-                        editor.revealRange(comment.range, vscode.TextEditorRevealType.Default);
+                        editor.revealRange(comment.range, vscode.TextEditorRevealType.InCenter);
                     }
                 }
             });
