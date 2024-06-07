@@ -9,13 +9,15 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+	"onCommand:extension.showComments"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "commentstranslator.helloWorld",
-        "title": "Hello World"
+        "command": "extension.showComments",
+        "title": "Show Comments"
       }
     ]
   },

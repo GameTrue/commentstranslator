@@ -1,26 +1,41 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+    let disposable = vscode.commands.registerCommand('extension.showComments', () => {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            vscode.window.showInformationMessage('Open a file first to see comments.');
+            return;
+        }
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "commentstranslator" is now active!');
+        const document = editor.document;
+        const text = document.getText();
+        const fileExtension = document.languageId;
+        const comments: string[] = [];
+        let regex;
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('commentstranslator.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from CommentsTranslator!');
-	});
+        // Select regex based on the file type
+        if (fileExtension === 'python') {
+            // Regex for Python comments: single-line and multi-line
+            regex = /#.*|'''[\s\S]*?'''|"""[\s\S]*?"""/g;
+        } else {
+            // Regex for other file comments (assumes C-like comments)
+            regex = /\/\/.*|\/\*[\s\S]*?\*\//g;
+        }
 
-	context.subscriptions.push(disposable);
+        let match;
+        while ((match = regex.exec(text)) !== null) {
+            comments.push(match[0]);
+        }
+
+        if (comments.length > 0) {
+            vscode.window.showQuickPick(comments, { placeHolder: 'Comments in this file' });
+        } else {
+            vscode.window.showInformationMessage('No comments found in this file.');
+        }
+    });
+
+    context.subscriptions.push(disposable);
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}
