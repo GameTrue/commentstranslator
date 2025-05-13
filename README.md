@@ -1,71 +1,73 @@
-# commentstranslator README
+# CommentsTranslator - Расширение для VSCode
 
-This is the README for your extension "commentstranslator". After writing up a brief description, we recommend including the following sections.
-
-## Features
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Расширение, разработанное в рамках лабораторной работы №3 по дисциплине «Инструментальные средства разработки ПО» в Санкт-Петербургском национальном исследовательском университете ИТМО.
 
 ---
 
-## Following extension guidelines
+## Описание
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+CommentsTranslator - это расширение для Visual Studio Code, которое помогает работать с комментариями в коде. Расширение предоставляет возможность просматривать список всех комментариев в файле, быстро перемещаться к ним, а также переводить комментарии на другой язык.
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+## Возможности
 
-## Working with Markdown
+1. **Просмотр комментариев**:
+   - Отображение списка всех комментариев в текущем файле
+   - Быстрая навигация к выбранному комментарию
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+2. **Перевод комментариев**:
+   - Автоматический перевод всех комментариев на любой язык
+   - Поддержка различных форматов комментариев (однострочные и многострочные)
+   - Поддержка различных языков программирования (Python, C-подобные языки)
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+## Установка и использование
 
-## For more information
+1. **Использование**:
+   - Для просмотра комментариев: нажмите `Ctrl+Shift+P` и выберите `Show Comments`
+   - Для перевода комментариев: нажмите `Ctrl+Shift+P` и выберите `Translate Comments to English`
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+## Технические детали
 
-**Enjoy!**
+Расширение разработано с использованием:
+- TypeScript
+- VS Code Extension API
+- Google Translate API (@vitalets/google-translate-api)
+
+Поддерживаемые типы комментариев:
+- Однострочные комментарии (`//` в C-подобных языках, `#` в Python)
+- Многострочные комментарии (`/* */` в C-подобных языках, `'''` и `"""` в Python)
+
+## Разработка и отладка
+
+1. Клонируйте репозиторий:
+   ```bash
+   git clone https://github.com/ваш-username/commentstranslator.git
+   cd commentstranslator
+   ```
+
+2. Установите зависимости:
+   ```bash
+   npm install
+   ```
+
+3. Запустите отладку, нажав F5 в VSCode
+
+## Структура проекта
+
+- `src/extension.ts` - основной файл с реализацией команд
+- `package.json` - манифест расширения и настройки
+- `.vscode/` - конфигурационные файлы для разработки
+- `out/` - скомпилированные файлы (создаются при сборке)
+
+---
+
+## Автор
+
+Фомин Александр Игоревич, студент группы №М3215, Санкт-Петербургский национальный исследовательский университет ИТМО.
+
+## Контакты
+
+Если у вас есть вопросы или предложения, вы можете связаться со мной через GitHub: [GameTrue](https://github.com/GameTrue).
+
+## Куратор проекта
+
+Прядкин Александр Олегович
